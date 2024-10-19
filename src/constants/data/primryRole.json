@@ -1,0 +1,11 @@
+[
+    { "value": "Software Engineer", "label": "Software Engineer" },
+    { "value": "Mobile Developer", "label": "Mobile Developer" },
+    { "value": "Android Developer", "label": "Android Developer" },
+    { "value": "iOS Developer", "label": "iOS Developer" },
+    { "value": "Frontend Engineer", "label": "Frontend Engineer" },
+    { "value": "Backend Engineer", "label": "Backend Engineer" },
+    { "value": "Full-Stack Engineer", "label": "Full-Stack Engineer" },
+    { "value": "Software Architect", "label": "Software Architect" },
+    { "value": "Machine Learning Engineer", "label": "Machine Learning Engineer" }
+  ]

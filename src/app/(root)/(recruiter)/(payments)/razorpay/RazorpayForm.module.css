@@ -1,0 +1,18 @@
+.error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    background-color: #3399cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button:hover {
+    background-color: #287aa9;
+  }

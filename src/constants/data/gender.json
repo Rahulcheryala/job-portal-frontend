@@ -1,0 +1,23 @@
+[
+    {
+      "label": "Man",
+      "value": "Man"
+    },
+    {
+      "label": "Woman",
+      "value": "Woman"
+    },
+    {
+      "label": "Non-binary",
+      "value": "Non-binary"
+    },
+    {
+      "label": "Self-describe",
+      "value": "Self-describe"
+    },
+    {
+      "label": "Prefer not to say",
+      "value": "Prefer not to say"
+    }
+  ]
+  

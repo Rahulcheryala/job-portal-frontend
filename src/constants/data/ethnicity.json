@@ -1,0 +1,44 @@
+{
+  "ethnicity_options": [
+    {
+      "value": "black_african",
+      "label": "Black / African-American"
+    },
+    {
+      "value": "east_asian",
+      "label": "East Asian (including Chinese, Japanese, Korean, and Mongolian)"
+    },
+    {
+      "value": "hispanic_latino",
+      "label": "Hispanic or Latino/a/x"
+    },
+    {
+      "value": "middle_eastern",
+      "label": "Middle Eastern"
+    },
+    {
+      "value": "native_american",
+      "label": "Native American or Alaskan Native"
+    },
+    {
+      "value": "pacific_islander",
+      "label": "Pacific Islander"
+    },
+    {
+      "value": "south_asian",
+      "label": "South Asian (including Bangladeshi, Bhutanese, Indian, Nepali, Pakistani, and Sri Lankan)"
+    },
+    {
+      "value": "southeast_asian",
+      "label": "Southeast Asian (including Burmese, Cambodian, Filipino, Hmong, Indonesian, Laotian, Malaysian, Mien, Singaporean, Thai, and Vietnamese)"
+    },
+    {
+      "value": "white",
+      "label": "White"
+    },
+    {
+      "value": "prefer_not_say",
+      "label": "Prefer not to say"
+    }
+  ]
+}
