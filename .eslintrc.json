@@ -1,4 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
-  "ignorePatterns": ["src/stories/**"]
+  "extends": ["next/core-web-vitals"],
+  "ignorePatterns": []
 }
