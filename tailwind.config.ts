@@ -1,8 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  mode: "jit",
-  purge: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -45,6 +43,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };
 export default config;
