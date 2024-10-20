@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa";
 import locOpns from "@/constants/data/location.json";
 import ExperienceTags from "@/constants/data/experience.json";
-import companyType from "@/constants/data/companytype.json";
+import companyType from "@/constants/data/companyType.json";
 import SkillTags from "@/constants/data/skillTags.json";
 import ethnicity from "@/constants/data/ethnicity.json";
 import LoginFormInput from "@/Components/Forms/Inputs/LoginFormInput";
@@ -749,7 +749,11 @@ const EditProfilePage = () => {
                     req={true}
                   />
                   <span
-                    className={`${manualErrorCls} ${aboutFormData.location === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                    className={`${manualErrorCls} ${
+                      aboutFormData.location === ""
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } `}
                   >
                     Location is required
                   </span>
@@ -784,7 +788,11 @@ const EditProfilePage = () => {
                     req={false}
                   />
                   <span
-                    className={`${manualErrorCls} ${aboutFormData.years_of_experience === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                    className={`${manualErrorCls} ${
+                      aboutFormData.years_of_experience === ""
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } `}
                   >
                     Years of experience is required
                   </span>
@@ -827,7 +835,11 @@ const EditProfilePage = () => {
                   req={false}
                 />
                 <span
-                  className={`${manualErrorCls} ${aboutFormData.skillsArray?.length === 0 ? "-translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                  className={`${manualErrorCls} ${
+                    aboutFormData.skillsArray?.length === 0
+                      ? "-translate-y-0 opacity-100"
+                      : "translate-y-full opacity-0"
+                  } `}
                 >
                   Skills are required
                 </span>
@@ -849,7 +861,11 @@ const EditProfilePage = () => {
                     multiple={false}
                   />
                   <span
-                    className={`${manualErrorCls} ${aboutFormData.product_service === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                    className={`${manualErrorCls} ${
+                      aboutFormData.product_service === ""
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } `}
                   >
                     This Field is required
                   </span>
@@ -868,7 +884,11 @@ const EditProfilePage = () => {
                     multiple={false}
                   />
                   <span
-                    className={`${manualErrorCls} ${aboutFormData.company_stage === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                    className={`${manualErrorCls} ${
+                      aboutFormData.company_stage === ""
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } `}
                   >
                     Company Stage is required
                   </span>
@@ -904,7 +924,11 @@ const EditProfilePage = () => {
                 )}
               />
               <span
-                className={`${manualErrorCls} ${aboutErrors.textarea ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                className={`${manualErrorCls} ${
+                  aboutErrors.textarea
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-full opacity-0"
+                } `}
               >
                 {aboutErrors.textarea?.message}
               </span>
@@ -1238,7 +1262,11 @@ const EditProfilePage = () => {
                   selected={generalFormData.pronouns}
                 />
                 <span
-                  className={`${manualErrorCls} ${generalFormData.pronouns === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                  className={`${manualErrorCls} ${
+                    generalFormData.pronouns === ""
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-full opacity-0"
+                  } `}
                 >
                   Pronouns is required
                 </span>
@@ -1263,7 +1291,11 @@ const EditProfilePage = () => {
                   selected={generalFormData.gender}
                 />
                 <span
-                  className={`${manualErrorCls} ${generalFormData.gender === "" ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} `}
+                  className={`${manualErrorCls} ${
+                    generalFormData.gender === ""
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-full opacity-0"
+                  } `}
                 >
                   Gender is required
                 </span>
