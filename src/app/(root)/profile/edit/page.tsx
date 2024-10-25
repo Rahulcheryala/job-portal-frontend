@@ -174,9 +174,9 @@ const EditProfilePage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isHirer, setIsHirer] = useState(false);
-  const [profilePicChanged, setProfilePicChanged] = useState(false);
-  const [resumeChanged, setResumeChanged] = useState(false);
-  const [companyPhotoChanged, setCompanyPhotoChanged] = useState(false);
+  // const [profilePicChanged, setProfilePicChanged] = useState(false);
+  // const [resumeChanged, setResumeChanged] = useState(false);
+  // const [companyPhotoChanged, setCompanyPhotoChanged] = useState(false);
   const [aboutFormDirty, setAboutFormDirty] = useState(false);
   const [aboutReset, setAboutReset] = useState(false);
   const [expAddButton, setExpAddButton] = useState(true);
@@ -240,6 +240,8 @@ const EditProfilePage = () => {
     ) {
       setAboutFormDirty(true);
     }
+
+    setAboutReset(false);
   };
 
   const handleSkillChange = (skills: string[]) => {
@@ -249,6 +251,7 @@ const EditProfilePage = () => {
     }));
 
     setAboutFormDirty(true);
+    setAboutReset(false);
   };
 
   const handleGeneralChange = (key: string, value: string) => {
@@ -320,7 +323,7 @@ const EditProfilePage = () => {
     const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
     const access_token = localStorage.getItem("access_token");
     try {
-      const response = await axios.put(
+      const response = await axios.patch(
         `${baseurl}/accounts/profile/`,
         {
           username: payloadRequirements.username,
@@ -540,8 +543,8 @@ const EditProfilePage = () => {
   }, []);
 
   // useEffect(() => {
-  //   console.log(aboutFormData.profile_picture);
-  // }, [aboutFormData.profile_picture]);
+  //   console.log(aboutFormData.company_name);
+  // }, [aboutFormData.company_name]);
 
   // useEffect(() => {
   //   console.log("experience array", workExperienceArray);
@@ -629,7 +632,7 @@ const EditProfilePage = () => {
         <div className="grid md:grid-cols-[30%,1fr] max-md:grid-cols-1 gap-x-6 gap-y-4 mt-2">
           <div className="flex flex-col items-start md:gap-y-10 sm:gap-y-8 gap-y-4">
             <div>
-              <h1 className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
+              <h1 className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
                 About
               </h1>
               <p className="text-sm">
@@ -645,7 +648,7 @@ const EditProfilePage = () => {
                 Url={aboutFormData.profile_picture_url}
                 onChange={handleAboutChange}
                 submit={handleFileUpload}
-                setFlag={setProfilePicChanged}
+                // setFlag={setProfilePicChanged}
               />
             </div>
 
@@ -657,7 +660,7 @@ const EditProfilePage = () => {
                   Url={aboutFormData.company_photo_url}
                   onChange={handleAboutChange}
                   submit={handleFileUpload}
-                  setFlag={setCompanyPhotoChanged}
+                  // setFlag={setCompanyPhotoChanged}
                 />
               </div>
             )}
@@ -669,7 +672,7 @@ const EditProfilePage = () => {
                   Url={aboutFormData.resume_url}
                   onChange={handleAboutChange}
                   submit={handleFileUpload}
-                  setFlag={setResumeChanged}
+                  // setFlag={setResumeChanged}
                 />
               )}
             </div>
@@ -769,7 +772,7 @@ const EditProfilePage = () => {
                     handle={(val: string) => {
                       handleAboutChange("company_name", val);
                     }}
-                    val={aboutFormData.company_name ?? ""}
+                    val={initialAboutFormData.company_name!}
                     reset={aboutReset}
                   />
                 </div>
@@ -913,7 +916,7 @@ const EditProfilePage = () => {
                     name="textarea"
                     id="textarea"
                     rows={6}
-                    className="textarea bg-gray-50 border leading-snug border-gray-300 text-gray-800 rounded w-full px-4 py-3 min-h-40 max-h-60 placeholder:italic placeholder-gray-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                    className="textarea bg-gray-50 border leading-snug border-gray-300 text-gray-800 rounded w-full px-4 py-3 min-h-40 max-h-60 placeholder:italic placeholder-gray-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 max-[450px]:text-sm text-base"
                     placeholder={
                       isHirer
                         ? "Tell us about your company"
@@ -969,7 +972,7 @@ const EditProfilePage = () => {
           onSubmit={socialProfilesSubmit(handleSocialProfilesFormSubmit)}
         >
           <div>
-            <h1 className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
+            <h1 className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
               Social Profiles
             </h1>
             <p className="text-sm text-pretty">
@@ -1040,11 +1043,12 @@ const EditProfilePage = () => {
               type="submit"
               className="bg-blue-500 text-white font-bold px-8 py-2 rounded-lg disabled:cursor-not-allowed disabled:opacity-50"
               disabled={
+                socialProfilesIsDirty &&
                 !!(
-                  socialProfilesErrors.website ||
-                  socialProfilesErrors.linkedin ||
-                  socialProfilesErrors.github ||
-                  socialProfilesErrors.telegram
+                  socialProfilesErrors.website! ||
+                  socialProfilesErrors.linkedin! ||
+                  socialProfilesErrors.github! ||
+                  socialProfilesErrors.telegram!
                 )
               }
             >
@@ -1052,7 +1056,7 @@ const EditProfilePage = () => {
             </button>
 
             <button
-              type="button"
+              type="reset"
               onClick={handleSocialProfilesFormReset}
               className="bg-blue-500 text-white font-bold px-8 py-2 rounded-lg"
             >
@@ -1065,7 +1069,7 @@ const EditProfilePage = () => {
           <>
             <div className="grid md:grid-cols-[30%,1fr] grid-cols-1 gap-x-6 gap-y-4">
               <div>
-                <h1 className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
+                <h1 className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
                   Experience
                 </h1>
                 <p className="text-sm">
@@ -1111,7 +1115,6 @@ const EditProfilePage = () => {
                     defaultPostEditFormInputCls={defaultPostEditFormInputCls}
                     dropdown={setExpAddButton}
                     // workExperienceArray={workExperienceArray}
-                    // onSubmitFn={onSubmitArrays}
                   />
                 )}
               </div>
@@ -1119,7 +1122,7 @@ const EditProfilePage = () => {
 
             <div className="grid md:grid-cols-[30%,1fr] grid-cols-1 gap-x-6 gap-y-4">
               <div>
-                <h1 className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
+                <h1 className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
                   Education
                 </h1>
                 <p className="text-sm">
@@ -1151,7 +1154,7 @@ const EditProfilePage = () => {
                     <button
                       type="button"
                       onClick={() => setEducationAddButton(false)}
-                      className="text-blue-500 hover:text-blue-700 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 font-medium rounded px-5 py-2.5 text-center flex justify-center items-center gap-2"
+                      className="text-blue-500 hover:text-blue-700 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 font-medium rounded px-5 py-2.5 text-center flex justify-center items-center gap-2 whitespace-nowrap"
                     >
                       <FaPlus className="ms-2" />
                       Add Education Qualifications
@@ -1164,9 +1167,6 @@ const EditProfilePage = () => {
                     defaultPostEditFormInputCls={defaultPostEditFormInputCls}
                     dropdown={setEducationAddButton}
                     educationArray={educationArray}
-                    onSubmit={() => {
-                      onSubmitArrays();
-                    }}
                   />
                 )}
               </div>
@@ -1182,7 +1182,7 @@ const EditProfilePage = () => {
             <h1>
               <label
                 htmlFor="achievements"
-                className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 inline-block mb-2"
+                className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 inline-block mb-2"
               >
                 Achievements
               </label>
@@ -1201,7 +1201,7 @@ const EditProfilePage = () => {
                   name="achievements"
                   id="achievements"
                   rows={6}
-                  className="textarea bg-gray-50 border leading-snug border-gray-300 text-gray-800 rounded w-full px-4 py-3 min-h-40 max-h-60 placeholder:italic placeholder-gray-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                  className="textarea bg-gray-50 border leading-snug border-gray-300 text-gray-800 rounded w-full px-4 py-3 min-h-40 max-h-60 placeholder:italic placeholder-gray-400 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 placeholder:max-[450px]:text-xs placeholder:sm:text-base placeholder:text-sm  max-[450px]:text-sm text-base"
                   placeholder="It's OK to brag - e.g. I launched 3 successful Facebook apps which in total reached 2M+ users and generated $100k+ in revenue. I built everything from the front-end to the back-end and everything in between."
                   value={field.value ?? ""}
                 />
@@ -1239,7 +1239,7 @@ const EditProfilePage = () => {
           onSubmit={generalHandleSubmit(handleGeneralFormSubmit)}
         >
           <div>
-            <h1 className="md:text-2xl text-lg font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
+            <h1 className="md:text-2xl text-xl font-semibold font-RadioGrotesk tracking-wide text-gray-800 mb-2">
               Identity
             </h1>
             <p className="text-sm">

@@ -134,12 +134,14 @@ const JobApplicationModal = ({
             )}
 
             <div>
-              <label
-                htmlFor="cover_letter"
-                className="text-gray-500 font-semibold block pb-1"
-              >
-                Cover Letter
-              </label>
+              {!isResumePresent && (
+                <label
+                  htmlFor="cover_letter"
+                  className="text-gray-500 font-semibold block pb-1"
+                >
+                  Cover Letter
+                </label>
+              )}
               <textarea
                 id="cover_letter"
                 name="cover_letter"

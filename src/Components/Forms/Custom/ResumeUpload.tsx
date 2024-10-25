@@ -60,7 +60,7 @@ const PdfUploadForm: React.FC<PdfUploadFormProps> = ({
         accept=".pdf"
         multiple={false}
         onChange={handleFileChange}
-        className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm outline-none focus-visible:ring-2 focus:ring-blue-300 file:bg-gray-500 file:border-0 file:me-4 file:py-2 file:px-2.5 placeholder:text-gray-400"
+        className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm outline-none focus-visible:ring-2 focus:ring-blue-300 file:bg-gray-500 file:text-white file:border-0 file:me-4 file:py-2 file:px-2.5 placeholder:text-gray-400"
         required={true}
       />
       {selectedFile && (

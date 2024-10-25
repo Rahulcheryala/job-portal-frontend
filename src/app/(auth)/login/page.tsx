@@ -19,7 +19,7 @@ type Schema = z.infer<typeof loginFormSchema>;
 
 const Login = () => {
   const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
-  const Router = useRouter();
+  const router = useRouter();
 
   const signupLinks = [
     {
@@ -86,11 +86,11 @@ const Login = () => {
 
       // Redirect the user to the appropriate dashboard
       if (account_type === "job_seeker") {
-        Router.push("/seeker-dashboard");
+        router.push("/seeker-dashboard");
       } else if (account_type === "job_hirer") {
-        Router.push("/dashboard");
+        router.push("/dashboard");
       } else {
-        Router.push("/");
+        router.push("/");
       }
     } catch (error) {
       // Handle any errors that occurred during the login or profile fetching

@@ -29,6 +29,7 @@ interface ProfileData {
   first_name: string;
   last_name: string;
   email: string;
+  profile_picture_url: string | null;
   // account_type: "job_seeker" | "job_hirer";
 
   job_seeker_profile?: {
@@ -55,7 +56,6 @@ interface ProfileData {
 
   personal_info: {
     phone_number: string;
-    profile_picture_url: string | null;
   };
 
   education_details: Education[];
@@ -93,6 +93,7 @@ const ProfilePage = () => {
           first_name: data.first_name || "",
           last_name: data.last_name || "",
           email: data.email || "",
+          profile_picture_url: data.profile_picture_url || null,
           // account_type: data.account_type,
 
           job_seeker_profile: data.job_seeker_profile
@@ -125,8 +126,6 @@ const ProfilePage = () => {
 
           personal_info: {
             phone_number: data.personal_info?.phone_number || "",
-            profile_picture_url:
-              data.personal_info?.profile_picture_url || null,
           },
 
           education_details: data.education_details
@@ -185,13 +184,13 @@ const ProfilePage = () => {
           <div className="flex items-center gap-2">
             <Image
               src={
-                profileData.personal_info.profile_picture_url ||
+                profileData.profile_picture_url ||
                 "/assets/images/default-profile.webp"
               }
               width={64}
               height={64}
               alt="Profile Picture"
-              className="sm:w-16 sm:h-16 w-12 aspect-square rounded-full"
+              className="sm:w-16 sm:h-16 w-12 aspect-square rounded-full object-cover border-2"
             />
             <div className="text-gray-700">
               <h2 className="md:text-2xl sm:text-xl max-[450px]:text-base text-lg font-semibold hover:text-blue-500 transition-colors duration-150">
@@ -213,7 +212,7 @@ const ProfilePage = () => {
           <Link
             href="/profile/edit"
             title="Edit Profile"
-            className="text-gray-500 hover:text-orange-500 hover:scale-110 transition-all duration-300 outline-none focus:outline-none focus:text-orange-500 focus:scale-110 max-sm:absolute max-sm:top-4 max-sm:right-0"
+            className="text-gray-500 hover:text-orange-500 hover:scale-110 transition-all duration-300 outline-none focus:outline-none focus:text-orange-500 focus:scale-110 max-sm:absolute max-sm:-top-3 max-sm:-right-1"
           >
             <FiEdit className="sm:w-8 sm:h-8 w-6 h-6" />
           </Link>
@@ -229,7 +228,7 @@ const ProfilePage = () => {
             <br />
           </p>
           {accountType === "job_seeker" && (
-            <p className="text-gray-500">
+            <p className="text-gray-500 sm:text-base max-[450px]:text-xs text-sm">
               Location: {profileData.job_seeker_profile?.location}
             </p>
           )}
@@ -317,8 +316,8 @@ const ProfilePage = () => {
                         {exp.end_date
                           ? exp.end_date
                           : exp.currently_working
-                            ? "Present"
-                            : "N/A"}
+                          ? "Present"
+                          : "N/A"}
                       </p>
                       <p className="text-gray-500 text-sm">{exp.description}</p>
                     </div>

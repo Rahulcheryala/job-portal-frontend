@@ -22,7 +22,7 @@ export default function RootLayout({
     <>
       <main className="min-h-screen w-full bg-white">
         <div className="flex">
-          {account_type && <Sidebar isHirer={account_type === "job_hirer"} />}
+          {token && <Sidebar isHirer={account_type === "job_hirer"} />}
           {children}
         </div>
       </main>

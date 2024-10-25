@@ -31,7 +31,11 @@ const CollegeSelect: React.FC<Props> = ({ handle, val, reset }) => {
 
   useEffect(() => {
     if (reset) {
-      setSelectedOption({ value: "", label: "" });
+      if (val) {
+        setSelectedOption({ value: val, label: val });
+      } else {
+        setSelectedOption({ value: "", label: "" });
+      }
     }
   }, [reset]);
 

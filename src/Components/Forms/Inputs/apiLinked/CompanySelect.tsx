@@ -43,7 +43,11 @@ const CompanySelect = ({ handle, val, reset }: Props) => {
 
   useEffect(() => {
     if (reset) {
-      setSelectedOption({ value: "", label: "" });
+      if (val) {
+        setSelectedOption({ value: val, label: val });
+      } else {
+        setSelectedOption({ value: "", label: "" });
+      }
     }
   }, [reset]);
 
@@ -140,7 +144,7 @@ const CompanySelect = ({ handle, val, reset }: Props) => {
           classNamePrefix="react-select"
           onInputChange={handleInputChange}
           onChange={handleChange}
-          placeholder="Search for your college"
+          placeholder="Search for your Company"
           menuIsOpen={inputValue != ""}
           components={{ Menu: CustomMenu }}
           isClearable

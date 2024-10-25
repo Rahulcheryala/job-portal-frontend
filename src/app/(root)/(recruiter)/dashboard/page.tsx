@@ -52,7 +52,7 @@ const Dashboard = async () => {
 
             <div className="w-full lg:w-auto sm:flex-1">
               <p className="xl:text-3xl lg:text-2xl md:text-xl text-base font-semibold text-blue-600">
-                {applicationsCount}+
+                {applicationsCount}
               </p>
               <p className="mt-1 text-gray-500 sm:text-sm text-[12px]">
                 Applications received
@@ -61,7 +61,7 @@ const Dashboard = async () => {
 
             <div className="w-full lg:w-auto sm:flex-1">
               <p className="xl:text-3xl lg:text-2xl md:text-xl text-base font-semibold text-blue-600">
-                {applicationsCount - 3}
+                {applicationsCount}
               </p>
               <p className="mt-1 text-gray-500 sm:text-sm text-[12px]">
                 Applications shortlisted

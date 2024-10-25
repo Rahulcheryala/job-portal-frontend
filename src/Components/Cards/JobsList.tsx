@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import JobCard from "./JobCard";
@@ -6,7 +7,6 @@ import Skeleton from "@/Components/Loaders/Skeleton";
 import Image from "next/image";
 import Link from "next/link";
 import { BiSolidArrowToTop } from "react-icons/bi";
-import { useRouter } from "next/router";
 
 // Define an interface representing the structure of a job object
 interface Job {
@@ -55,19 +55,16 @@ interface SearchParams {
 const JobsList: React.FC<SearchParams> = React.memo(
   ({ searchParams, type = "jobs" }) => {
     const [jobs, setJobs] = useState<Job[]>([]);
-    const [jobsCopy, setJobsCopy] = useState<Job[]>([]);
-
     const [loaded, setLoaded] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [hasMore, setHasMore] = useState<boolean>(true);
-    const [fetchCount] = useState(3);
     const scrollRef = useRef<HTMLDivElement>(null);
-    const scrollToTopRef = useRef<HTMLAnchorElement>(null);
+    const scrollToTopRef = useRef<HTMLButtonElement>(null);
     const fetchingMore = useRef<boolean>(false);
     const [loadingMore, setLoadingMore] = useState<boolean>(false); // State for the loading message
 
     const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
-
+    let account_type: string | null = null;
     // useEffect(() => {
     //   const filteredJobs = jobsCopy.filter((job) => {
     //     const position = job.position.toLowerCase();
@@ -107,10 +104,12 @@ const JobsList: React.FC<SearchParams> = React.memo(
             type === "posted"
               ? "posted-jobs"
               : type === "applied"
-                ? "applied-jobs"
-                : "jobs";
+              ? "applied-jobs"
+              : "jobs";
 
-          const url = `${baseurl}/${endpoint}/${params.toString() ? `?${params.toString()}` : ""}`;
+          const url = `${baseurl}/${endpoint}/${
+            params.toString() ? `?${params.toString()}` : ""
+          }`;
 
           // console.log("Fetching jobs from URL:", url);
           const token = localStorage.getItem("access_token");
@@ -133,7 +132,6 @@ const JobsList: React.FC<SearchParams> = React.memo(
 
           if (fetchedJobs.length > 0) {
             setJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
-            setJobsCopy((prevJobs) => [...prevJobs, ...fetchedJobs]);
           }
           // Restore the scroll position after updating jobs
           setTimeout(() => {
@@ -173,6 +171,7 @@ const JobsList: React.FC<SearchParams> = React.memo(
 
     // Fetch jobs whenever the page state changes
     useEffect(() => {
+      account_type = localStorage.getItem("account_type");
       fetchJobs(page); // Fetch jobs for the current page
     }, [page]);
 
@@ -228,7 +227,7 @@ const JobsList: React.FC<SearchParams> = React.memo(
     return (
       <section
         ref={scrollRef}
-        className="max-h-full overflow-y-auto scrollbar-hide overscroll-contain w-full justify-self-center scroll-smooth"
+        className="flex-1 max-h-full overflow-y-auto scrollbar-hide overscroll-contain w-full scroll-smooth"
       >
         {!loaded && jobs.length === 0 ? (
           <Skeleton />
@@ -285,34 +284,37 @@ const JobsList: React.FC<SearchParams> = React.memo(
                   alt="No applicants found"
                   width={500}
                   height={500}
-                  className="sm:w-80 sm:h-80 h-32 w-32"
+                  className="sm:w-80 sm:h-80 h-52 w-52"
                 />
-                <p className="text-gray-500">
+                <p className="text-gray-500 text-center max-[450px]:text-sm">
                   Try changing the search filters to find more jobs
                 </p>
-                <span className="uppercase text-xl font-semibold text-gray-300">
-                  or
-                </span>
-                <Link href="/post">
-                  <p className="text-blue-500 underline hover:underline-offset-2">
-                    Post a job
-                  </p>
-                </Link>
+                {account_type && account_type === "job_hirer" && (
+                  <>
+                    <span className="uppercase text-xl font-semibold text-gray-300">
+                      or
+                    </span>
+                    <Link href="/post">
+                      <p className="text-blue-500 underline hover:underline-offset-2">
+                        Post a job
+                      </p>
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </>
         )}
 
-        <Link
-          href="#start"
+        <button
           title="Scroll to top"
           onClick={() => scrollRef.current?.scrollTo(0, 0)}
           ref={scrollToTopRef}
           className="bg-blue-100 text-blue-500 absolute sm:right-6 right-2 lg:bottom-4 bottom-2 px-2 pt-2 pb-1 rounded"
-          style={{ display: "none" }} // Initially hide the link
+          style={{ display: "none" }} // Initially hide the button
         >
           <BiSolidArrowToTop className="w-6 h-6 animate-bounce" />
-        </Link>
+        </button>
       </section>
     );
   }

@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import * as Slider from "@radix-ui/react-slider";
 import SearchSelectDropdown from "./SearchSelectDropdown";
+import DotLoader from "@/Components/Loaders/DotLoader";
 
 type RangeSliderProps = {
   label?: string;
@@ -43,6 +44,7 @@ const RangeSlider = ({
       USD: 1,
     }
   );
+  const [loading, setLoading] = useState<boolean>(true);
 
   const determineStepValue = (currencyType: string) => {
     switch (currencyType) {
@@ -111,6 +113,7 @@ const RangeSlider = ({
       } catch (error) {
         console.error("Failed to fetch currency rates:", error);
       }
+      setLoading(false);
     };
 
     if (currencyList.length === 0) getVals();
@@ -151,60 +154,68 @@ const RangeSlider = ({
 
   return (
     <div className="flex flex-col justify-center w-full py-4 px-1">
-      <div className="flex justify-between items-start">
-        <label htmlFor={name} className={labelCls + " text-left"}>
-          {label}
-        </label>
+      {loading ? (
+        <div className="h-14 w-full">
+          <DotLoader />
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-between items-start">
+            <label htmlFor={name} className={labelCls + " text-left"}>
+              {label}
+            </label>
 
-        {currencyList.length > 0 && (
-          <SearchSelectDropdown
-            name="currency_type"
-            tags={currencyList}
-            cls="w-24 px-2 py-0.5 bg-gray-50 text-gray-700 rounded-lg border border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 placeholder:text-sm placeholder:italic"
-            onSingleChange={handleCurrencyChange}
-            selected={currencyType}
-            placeholder="Currency"
-            multiple={false}
-          />
-        )}
-      </div>
-
-      <Slider.Root
-        className="relative flex items-center w-full h-6 my-2"
-        value={values}
-        min={sliderBounds.min}
-        max={sliderBounds.max}
-        step={sliderBounds.step}
-        onValueChange={handleValueChange}
-        onValueCommit={(committedValues) => {
-          // Convert to USD before storing in search params
-          const usdMin = convertToUSD(committedValues[0], currencyType);
-          const usdMax = convertToUSD(committedValues[1], currencyType);
-
-          handleChange("annual_salary_min", usdMin.toString());
-          handleChange("annual_salary_max", usdMax.toString());
-        }}
-      >
-        <Slider.Track className="bg-gray-300 relative flex-grow h-1 rounded-full">
-          <Slider.Range className="absolute bg-blue-500 h-full rounded-full" />
-        </Slider.Track>
-        <Slider.Thumb
-          className="block w-5 h-5 bg-blue-500 border rounded-full outline-none relative focus-visible:ring-2 ring-gray-700"
-          aria-label="Minimum Value"
-        >
-          <div className="absolute font-semibold -bottom-6 right-full translate-x-full text-xs text-gray-500 whitespace-nowrap">
-            {formatValue(values[0])}
+            {currencyList.length > 0 && (
+              <SearchSelectDropdown
+                name="currency_type"
+                tags={currencyList}
+                cls="w-24 px-2 py-0.5 bg-gray-50 text-gray-700 rounded-lg border border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 placeholder:text-sm placeholder:italic"
+                onSingleChange={handleCurrencyChange}
+                selected={currencyType}
+                placeholder="Currency"
+                multiple={false}
+              />
+            )}
           </div>
-        </Slider.Thumb>
-        <Slider.Thumb
-          className="block w-5 h-5 bg-blue-500 border rounded-full outline-none relative focus-visible:ring-2 ring-gray-700"
-          aria-label="Maximum Value"
-        >
-          <div className="absolute font-semibold -bottom-6 left-full -translate-x-[70%] text-xs text-gray-500 whitespace-nowrap">
-            {formatValue(values[1])}
-          </div>
-        </Slider.Thumb>
-      </Slider.Root>
+
+          <Slider.Root
+            className="relative flex items-center w-full h-6 my-2"
+            value={values}
+            min={sliderBounds.min}
+            max={sliderBounds.max}
+            step={sliderBounds.step}
+            onValueChange={handleValueChange}
+            onValueCommit={(committedValues) => {
+              // Convert to USD before storing in search params
+              const usdMin = convertToUSD(committedValues[0], currencyType);
+              const usdMax = convertToUSD(committedValues[1], currencyType);
+
+              handleChange("annual_salary_min", usdMin.toString());
+              handleChange("annual_salary_max", usdMax.toString());
+            }}
+          >
+            <Slider.Track className="bg-gray-300 relative flex-grow h-1 rounded-full">
+              <Slider.Range className="absolute bg-blue-500 h-full rounded-full" />
+            </Slider.Track>
+            <Slider.Thumb
+              className="block w-5 h-5 bg-blue-500 border rounded-full outline-none relative focus-visible:ring-2 ring-gray-700"
+              aria-label="Minimum Value"
+            >
+              <div className="absolute font-semibold -bottom-6 right-full translate-x-full text-xs text-gray-500 whitespace-nowrap">
+                {formatValue(values[0])}
+              </div>
+            </Slider.Thumb>
+            <Slider.Thumb
+              className="block w-5 h-5 bg-blue-500 border rounded-full outline-none relative focus-visible:ring-2 ring-gray-700"
+              aria-label="Maximum Value"
+            >
+              <div className="absolute font-semibold -bottom-6 left-full -translate-x-[70%] text-xs text-gray-500 whitespace-nowrap">
+                {formatValue(values[1])}
+              </div>
+            </Slider.Thumb>
+          </Slider.Root>
+        </>
+      )}
     </div>
   );
 };

@@ -32,8 +32,10 @@ const SingleSelect: React.FC<SingleSelectProps> = ({
   };
 
   return (
-    <div>
-      <label className="block font-semibold text-gray-500 mb-1">{label}</label>
+    <div className="mx-2">
+      <label className="block font-semibold text-gray-500 mb-1 -ms-1.5">
+        {label}
+      </label>
 
       {options.map((option) => (
         <div key={option.value} className="mt-2 text-[14px]">

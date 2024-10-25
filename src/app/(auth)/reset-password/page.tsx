@@ -1,12 +1,12 @@
 "use client";
 
-import Swal from "sweetalert2";
 import axios from "axios";
 import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { forgotPasswordSchema } from "@/lib/validator";
+import { swalFailed, swalSuccess } from "@/lib/helpers/swal";
 
 type Schema = z.infer<typeof forgotPasswordSchema>;
 
@@ -30,30 +30,21 @@ const ResetPasswordPage = () => {
       });
 
       if (response.data.detail) {
-        Swal.fire({
-          title: "Password Reset Link",
-          text: response.data.detail,
-          icon: "success",
-          toast: true,
-          timer: 6000,
-          position: "top-right",
-          timerProgressBar: true,
-          showConfirmButton: false,
+        swalSuccess({
+          title: "Password Reset Link Sent",
+          type: "toast",
         });
       } else {
-        Swal.fire({
-          title: "Password Reset Link",
-          text: response.data.email,
-          icon: "error",
-          toast: true,
-          timer: 6000,
-          position: "top-right",
-          timerProgressBar: true,
-          showConfirmButton: false,
+        swalFailed({
+          title: "Request Failed",
+          type: "toast",
         });
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      swalFailed({
+        title: "Request Failed",
+        error: error.response.data.detail,
+      });
     }
   };
 
@@ -96,7 +87,11 @@ const ResetPasswordPage = () => {
                     />
                   </div>
                   <p
-                    className={`${errors.email ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"} transition-transform duration-300 text-xs text-red-500 mt-2 ml-1`}
+                    className={`${
+                      errors.email
+                        ? "translate-y-0 opacity-100"
+                        : "-translate-y-4 opacity-0"
+                    } transition-transform duration-300 text-xs text-red-500 mt-2 ml-1`}
                   >
                     {errors.email?.message}
                   </p>

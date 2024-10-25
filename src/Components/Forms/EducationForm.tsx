@@ -80,6 +80,8 @@ const EducationForm = ({
       ...prevState,
       [key]: value,
     }));
+
+    setEducationFormReset(false);
   };
 
   const handleAddEducation = (data: EducationSchema) => {

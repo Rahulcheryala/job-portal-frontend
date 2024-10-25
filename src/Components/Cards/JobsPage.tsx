@@ -15,7 +15,13 @@ interface SearchParams {
   currency_type: string;
 }
 
-const JobsPage = ({ type }: { type: string }) => {
+const JobsPage = ({
+  type,
+  isAuthenticated,
+}: {
+  type: string;
+  isAuthenticated?: boolean;
+}) => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
 
   const values = {
@@ -71,14 +77,22 @@ const JobsPage = ({ type }: { type: string }) => {
   // }, [tempParams.currency_type]);
 
   return (
-    <div className="bg-[#FAFAFA] flex-1 sm:px-6 max-[450px]:px-2 px-3 flex flex-col min-h-screen max-h-screen relative scroll-smooth">
-      <div className="w-full text-left max-lg:grid max-lg:grid-flow-col max-lg:justify-between max-lg:items-center max-[450px]:pt-5 mt-4 mb-2">
-        <h1 className="md:text-4xl sm:text-3xl text-2xl ms-2 text-blue-500 font-semibold 2xl:ps-12 tracking-tighter whitespace-nowrap">
+    <div
+      className={`bg-[#FAFAFA] flex-1 sm:px-6 max-[450px]:px-2 px-3 flex flex-col min-h-screen max-h-screen relative scroll-smooth ${
+        !isAuthenticated ? "xl:ml-14 lg:ml-6" : "min-[450px]:ml-1.5"
+      }`}
+    >
+      <div className="w-full text-left flex justify-between items-center max-[450px]:pt-5 mt-4 mb-2">
+        <h1
+          className={`md:text-4xl sm:text-3xl text-2xl ms-2 text-blue-500 font-semibold tracking-tighter whitespace-nowrap ${
+            type === "jobs" && "lg:w-[364px] max-[450px]:hidden block"
+          }`}
+        >
           {type === "posted"
             ? "Posted Jobs"
             : type === "applied"
-              ? "Applied Jobs"
-              : "Jobs"}
+            ? "Applied Jobs"
+            : "Find Jobs"}
         </h1>
 
         {type !== "applied" && (
@@ -93,7 +107,11 @@ const JobsPage = ({ type }: { type: string }) => {
               Search Filters
             </button>
             <div
-              className={`absolute z-10 top-12 right-2 transition-all duration-300 ease-in-out ${showFilters ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}
+              className={`absolute z-10 top-12 right-2 transition-all duration-300 ease-in-out ${
+                showFilters
+                  ? "translate-y-0 opacity-100"
+                  : "-translate-y-full opacity-0 pointer-events-none"
+              }`}
             >
               <SearchFiltersForm
                 searchParams={tempParams}
@@ -111,12 +129,10 @@ const JobsPage = ({ type }: { type: string }) => {
       </div>
 
       <div
-        className={`flex-1 w-full max-h-[calc(100%-4.5rem)] grid grid-flow-col lg:grid-cols-[1fr,minmax(0,384px)] max-lg:grid-cols-1 justify-end gap-x-6`}
+        className={`flex-1 w-full max-h-[calc(100%-4.5rem)] flex lg:flex-row flex-col gap-x-10`}
       >
-        <JobsList type={type} searchParams={searchParams} />
-
         {type !== "applied" && (
-          <div className="hidden lg:block">
+          <div className="hidden lg:block min-w-[364px]">
             <SearchFiltersForm
               searchParams={tempParams}
               handleChange={handleChange}
@@ -128,6 +144,8 @@ const JobsPage = ({ type }: { type: string }) => {
             />
           </div>
         )}
+
+        <JobsList type={type} searchParams={searchParams} />
       </div>
     </div>
   );

@@ -87,6 +87,8 @@ const ExperienceForm = ({
         [key]: value,
       }));
     }
+
+    setExperienceFormReset(false);
   };
 
   const handleAddWorkExperience = async (data: ExperienceSchema) => {
@@ -195,7 +197,9 @@ const ExperienceForm = ({
 
         <div className="flex flex-col sm:flex-row gap-x-6 gap-y-4 items-center">
           <div
-            className={`flex flex-col justify-center w-full ${experienceFormData.currently_working && "sm:w-[48%]"}`}
+            className={`flex flex-col justify-center w-full ${
+              experienceFormData.currently_working && "sm:w-[48%]"
+            }`}
           >
             <label className="text-gray-500 font-semibold block mb-1.5 me-1.5">
               Start Date <span className="text-red-500">*</span>
@@ -203,7 +207,7 @@ const ExperienceForm = ({
             <div className="flex items-center bg-gray-100 w-full rounded relative border border-gray-300 h-[2.6875rem]">
               <DatePicker
                 required
-                dateFormat="yyyy/MM/dd"
+                dateFormat="dd/MM/yyyy"
                 selected={
                   experienceFormData.start_date
                     ? new Date(experienceFormData.start_date)
@@ -238,7 +242,7 @@ const ExperienceForm = ({
               <div className="flex items-center bg-gray-100 w-full rounded relative border border-gray-300 h-[2.6875rem]">
                 <DatePicker
                   required={!experienceFormData.currently_working}
-                  dateFormat="yyyy/MM/dd"
+                  dateFormat="dd/MM/yyyy"
                   selected={
                     experienceFormData.end_date
                       ? new Date(experienceFormData.end_date)
@@ -308,7 +312,11 @@ const ExperienceForm = ({
             )}
           />
           <p
-            className={`${manualErrorCls} ${errors.description ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
+            className={`${manualErrorCls} ${
+              errors.description
+                ? "translate-y-0 opacity-100"
+                : "translate-y-full opacity-0"
+            }`}
           >
             {errors.description?.message}
           </p>

@@ -16,21 +16,22 @@ export const dashboardDetails = async () => {
         Authorization: `Bearer ${access_token}`,
       },
     });
-    jobsCount = response.data.results.length;
+    jobsCount = response.data.count;
   } catch (error: any) {
     console.error(error.response?.data || error.message);
   }
 
-  try {
-    const responseApplications = await axios.get(`${baseurl}/applications`, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
-    applicationsCount = responseApplications.data.length;
-  } catch (error: any) {
-    console.error(error.response?.data || error.message);
-  }
+  // need to change this
+  // try {
+  //   const responseApplications = await axios.get(`${baseurl}/applications`, {
+  //     headers: {
+  //       Authorization: `Bearer ${access_token}`,
+  //     },
+  //   });
+  //   applicationsCount = responseApplications.data.length;
+  // } catch (error: any) {
+  //   console.error(error.response?.data || error.message);
+  // }
 
   // Return as a JSON object
   return {

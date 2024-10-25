@@ -65,10 +65,14 @@ export default function Home() {
           <span className="max-md:italic">All in one place</span>.
         </p>
 
-        <div className="hidden max-[400px]:block max-[400px]:mt-6 text-center h-fit">
+        <div className="hidden max-[405px]:block max-[405px]:mt-6 text-center h-fit">
           {isAuthenticated ? (
             <Link
-              href={`${accountType === "job_seeker" ? "/seeker-dashboard" : "/dashboard"}`}
+              href={`${
+                accountType === "job_seeker"
+                  ? "/seeker-dashboard"
+                  : "/dashboard"
+              }`}
               className="py-2 px-6 rounded-full transform transition-all ease-in-out duration-300 text-white
               hover:-translate-y-1 focus-visible:-translate-y-1 hover:scale-110 focus-visible:scale-110 bg-blue-500/90 border-2 border-blue-500/90 hover:bg-blue-500 hover:border-blue-500 outline-none focus-visible:ring-2 ring-blue-300 focus-visible:ring-offset-2"
             >

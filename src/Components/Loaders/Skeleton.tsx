@@ -2,7 +2,7 @@ import React from "react";
 
 const Skeleton = () => {
   return (
-    <div className="flex animate-pulse 2xl:px-12">
+    <div className="flex animate-pulse 2xl:px-10 max-w-screen-lg mx-auto">
       <div
         role="status"
         className="min-w-full flex flex-col gap-4 animate-pulse"

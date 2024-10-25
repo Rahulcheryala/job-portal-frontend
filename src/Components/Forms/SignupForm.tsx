@@ -49,11 +49,11 @@ const SignupForm = ({
     "relative w-full p-2 bg-gray-50 text-gray-800 rounded-lg border border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-blue-300";
 
   return (
-    <div className="lg:h-screen min-h-screen flex flex-col lg:flex-row sm:gap-y-8 gap-y-3 bg-gray-100 bg-fixed bg-signup bg-cover bg-no-repeat bg-center max-sm:overflow-x-hidden">
-      <div className="flex-1 flex flex-col items-center justify-center max-lg:mt-12">
+    <div className="lg:h-screen lg:overflow-y-hidden min-h-screen flex flex-col lg:flex-row sm:gap-y-8 gap-y-3 bg-gray-100 bg-fixed bg-signup bg-cover bg-no-repeat bg-center max-sm:overflow-x-hidden">
+      <div className="flex-1 flex flex-col items-center justify-center max-md:mt-12">
         <div className="text-center lg:space-y-12 md:space-y-10 sm:space-y-8 space-y-6 px-10">
           <Image
-            src="/assets/icons/logo.svg"
+            src="/assets/icons/company_logo.svg"
             alt="logo"
             width={400}
             height={400}
@@ -215,7 +215,11 @@ const SignupForm = ({
                   onChange={(value) => handleChange("phone_number", value!)}
                 />
                 <span
-                  className={`text-red-500 text-[11px] font-semibold  ${formDataErrors.phone_number ? "-translate-y-0.5 opacity-100" : "translate-y-full opacity-0"} transition-all transform duration-300 absolute z-10 bg-red-50 rounded-b-md top-full px-2 py-0.5 before:content-[''] before:absolute before:w-2 before:h-2 before:bg-red-50 before:left-0 before:bottom-full after:content-[''] after:absolute after:z-10 after:w-2 after:h-2 after:bg-gray-50 after:rounded-bl-md after:border-l after:border-b after:border-gray-300 after:left-0 after:bottom-full`}
+                  className={`text-red-500 text-[11px] font-semibold  ${
+                    formDataErrors.phone_number
+                      ? "-translate-y-0.5 opacity-100"
+                      : "translate-y-full opacity-0"
+                  } transition-all transform duration-300 absolute z-10 bg-red-50 rounded-b-md top-full px-2 py-0.5 before:content-[''] before:absolute before:w-2 before:h-2 before:bg-red-50 before:left-0 before:bottom-full after:content-[''] after:absolute after:z-10 after:w-2 after:h-2 after:bg-gray-50 after:rounded-bl-md after:border-l after:border-b after:border-gray-300 after:left-0 after:bottom-full`}
                 >
                   {formDataErrors.phone_number || ""}
                 </span>
@@ -259,7 +263,11 @@ const SignupForm = ({
                   <button
                     type="button"
                     className={`flex flex-1 items-center rounded-md px-4 py-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-300 transition-colors duration-300 
-                    ${formData.looking_for === "freelance" ? "bg-blue-300 text-white" : "bg-gray-200 text-gray-600"}`}
+                    ${
+                      formData.looking_for === "freelance"
+                        ? "bg-blue-300 text-white"
+                        : "bg-gray-200 text-gray-600"
+                    }`}
                     onClick={() => {
                       handleChange("looking_for", "freelance");
                     }}
@@ -274,7 +282,11 @@ const SignupForm = ({
                   <button
                     type="button"
                     className={`flex flex-1 items-center rounded-md px-4 py-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-300 transition-colors duration-300 
-                    ${formData.looking_for === "full_time" ? "bg-blue-300 text-white" : "bg-gray-200 text-gray-600"}`}
+                    ${
+                      formData.looking_for === "full_time"
+                        ? "bg-blue-300 text-white"
+                        : "bg-gray-200 text-gray-600"
+                    }`}
                     onClick={() => {
                       handleChange("looking_for", "full_time");
                     }}
@@ -303,7 +315,11 @@ const SignupForm = ({
                     req={true}
                   />
                   <span
-                    className={`text-red-500 text-xs font-semibold  ${formDataErrors.location ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} transition-all transform duration-300 top-full`}
+                    className={`text-red-500 text-xs font-semibold  ${
+                      formDataErrors.location
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } transition-all transform duration-300 top-full`}
                   >
                     {formDataErrors.location || ""}
                   </span>
@@ -322,7 +338,11 @@ const SignupForm = ({
                     req={true}
                   />
                   <span
-                    className={`text-red-500 text-xs font-semibold  ${formDataErrors.years_of_experience ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"} transition-all transform duration-300 top-full`}
+                    className={`text-red-500 text-xs font-semibold  ${
+                      formDataErrors.years_of_experience
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    } transition-all transform duration-300 top-full`}
                   >
                     {formDataErrors.years_of_experience || ""}
                   </span>
@@ -347,7 +367,7 @@ const SignupForm = ({
               id="how_heard_about_company"
               name="how_heard_about_company"
               type="text"
-              label="How did you hear about CodeUnity?"
+              label="How did you hear about QuickHire?"
               control={control}
               placeholder="How did you hear about us"
               req={false}

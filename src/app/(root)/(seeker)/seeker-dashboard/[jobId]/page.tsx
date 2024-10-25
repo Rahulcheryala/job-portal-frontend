@@ -127,7 +127,7 @@ const JobDetails = ({ params }: { params: { jobId: number } }) => {
 
   return (
     <section className="w-full min-h-screen bg-white">
-      {isModalOpen && !isResumePresent && (
+      {isModalOpen && (
         <>
           {/* Overlay */}
           <div className="fixed z-[60] w-[100vw] h-[100dvh] inset-0 bg-black opacity-70 backdrop-blur-sm transition-opacity duration-1000"></div>

@@ -59,7 +59,7 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
     Cookies.remove("access_token");
     Cookies.remove("refresh_token");
     Cookies.remove("account_type");
-    router.push("/");
+    router.replace("/");
   };
 
   const getProfile = async () => {
@@ -79,13 +79,13 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
     } catch (error) {
       // Handle any errors that occurred during the login or profile fetching
       console.error(error);
-      if (
-        axios.isAxiosError(error) &&
-        error.response &&
-        error.response.status === 401
-      ) {
-        router.replace("/login");
-      }
+      // if (
+      //   axios.isAxiosError(error) &&
+      //   error.response &&
+      //   error.response.status === 401
+      // ) {
+      //   router.replace("/login");
+      // }
     }
   };
 
@@ -112,7 +112,7 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
         <div className="fixed z-40 w-[100vw] h-[100dvh] inset-0 bg-black opacity-70 backdrop-blur-sm transition-opacity duration-1000"></div>
       )}
       <aside
-        className={`h-screen fixed z-50 transition-all duration-500 ease-out ${
+        className={`h-dvh fixed z-50 transition-all duration-500 ease-out ${
           isOpen
             ? "sm:min-w-72 sm:max-w-72 min-w-52 max-w-52"
             : "min-w-[4.5rem] max-w-[4.5rem] max-[450px]:min-w-0 max-[450px]:max-w-0"
@@ -122,23 +122,36 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
           className={`relative h-full flex flex-col bg-[#FAFAFA] border-r-2 border-gray-300 pt-2`}
         >
           <Link
-            href={isHirer ? "/dashboard" : "seeker-dashboard"}
-            className="w-full px-4 text-center outline-none"
+            href={isHirer ? "/dashboard" : "/seeker-dashboard"}
+            className="w-full px-4 h-10 text-center outline-none"
           >
             {isOpen ? (
               <Image
-                src="/assets/icons/logo.svg"
-                alt="Code Unity logo"
-                width={600}
-                height={90}
-                className={`w-24 sm:w-32 sm:h-10 h-8 object-contain mx-4 transition-all duration-700 ${isOpen ? "translate-x-0 opacity-100" : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"}`}
+                src="/assets/icons/company_logo.svg"
+                alt="Company logo"
+                width={275}
+                height={60}
+                className={`w-24 sm:w-32 sm:h-10 h-9 object-contain mx-4 transition-all duration-300 ease-in-out ${
+                  isOpen
+                    ? "translate-x-0 opacity-100"
+                    : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"
+                }`}
               />
             ) : (
-              <p
-                className={`font-bold text-black my-2 transition-all duration-300 ${isOpen ? "translate-x-0 opacity-100" : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"}`}
-              >
-                &lt;/&gt;
-              </p>
+              // <div className="w-10 max-w-10">
+              <Image
+                src="/assets/images/logo.png"
+                title="QuickHire"
+                alt="Company logo"
+                width={40}
+                height={40}
+                className={`max-w-10 w-10 h-7 font-bold text-black my-2 transition-all duration-500 ${
+                  isOpen
+                    ? "translate-x-0 opacity-100"
+                    : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"
+                }`}
+              />
+              // </div>
             )}
           </Link>
 
@@ -154,7 +167,9 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
           >
             <FaChevronLeft
               size={20}
-              className={`${isOpen ? "rotate-0" : "rotate-180"} transition-transform duration-300`}
+              className={`${
+                isOpen ? "rotate-0" : "rotate-180"
+              } transition-transform duration-300`}
             />
           </button>
 
@@ -167,17 +182,22 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
                   ${
                     pathname === link.href
                       ? "bg-gray-200 text-gray-700"
-                      : "text-gray-600 hover:bg-gray-200/40"
+                      : "text-gray-600 hover:bg-gray-200/50"
                   }`}
                 >
                   <div
-                    className={`p-1 transition-all duration-300 ${isOpen ? "-translate-x-0 opacity-100" : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"} `}
+                    className={`p-1 transition-all duration-300 ${
+                      isOpen
+                        ? "-translate-x-0 opacity-100 max-[450px]:ms-2"
+                        : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"
+                    } `}
                   >
                     {link.icon}
                   </div>
                   <span
-                    className={`overflow-hidden px-1 transition-all duration-500 
-              ${!isOpen && "opacity-0 overflow-hidden translate-x-14"}`}
+                    className={`overflow-hidden px-1 transition-all duration-500 ${
+                      !isOpen && "opacity-0 overflow-hidden translate-x-14"
+                    }`}
                   >
                     {link.name}
                   </span>
@@ -193,31 +213,51 @@ const Sidebar = ({ isHirer }: { isHirer: boolean }) => {
 
           <div className="w-full">
             <button
-              className={`sm:hidden block rounded-t-md border-t-2 border-x-2 border-gray-300 p-1 mx-1 bg-gray-100 hover:bg-gray-200 outline-none focus-visible:ring-2 focus-visible:ring-gray-500 transition-all duration-300  ${isOpen ? "-translate-x-0 opacity-100" : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"}`}
+              className={`sm:hidden block rounded-t-md border-t-2 border-x-2 border-blue-500 p-1 mx-1 bg-gray-100 hover:bg-gray-200 outline-none focus-visible:ring-2 focus-visible:ring-gray-500 transition-all duration-300  ${
+                isOpen
+                  ? "-translate-x-0 opacity-100"
+                  : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"
+              }`}
               onClick={() => setIsPop((curr) => !curr)}
             >
               <IoIosArrowUp
                 size={24}
-                className={`${isPop ? "rotate-180" : "rotate-0"} transition-transform duration-300 ease-in-out`}
+                className={`${
+                  isPop ? "rotate-180" : "rotate-0"
+                } transition-transform duration-300 ease-in-out`}
               />
             </button>
 
             <div
-              className={`sm:hidden block h-fit transition-all duration-500 ${isPop ? "border-t-2 border-gray-300 opacity-100 max-h-40" : "opacity-0 max-h-0"} `}
+              className={`sm:hidden block h-fit transition-all duration-500 ${
+                isPop
+                  ? "border-t-2 border-gray-300 opacity-100 max-h-40"
+                  : "opacity-0 max-h-0"
+              } `}
             >
               <ul className="max-[400px]:p-1 p-2 text-sm text-gray-700">
-                <li className="block text-xs text-center sm:px-4 px-2 py-2 hover:bg-gray-200 rounded-lg font-semibold">
-                  <Link href="/profile">Profile</Link>
-                </li>
-                <li className="block text-xs text-center w-full sm:px-4 px-2 py-2 hover:bg-gray-200 rounded-lg font-semibold">
-                  <button onClick={handleLogOut}>Logout</button>
-                </li>
+                <Link
+                  className="block text-xs text-center sm:px-4 px-2 py-2 hover:bg-gray-200 rounded-lg font-semibold"
+                  href="/profile"
+                >
+                  <span>Profile</span>
+                </Link>
+                <button
+                  className="block text-xs text-center w-full sm:px-4 px-2 py-2 hover:bg-gray-200 rounded-lg font-semibold"
+                  onClick={handleLogOut}
+                >
+                  <span>Logout</span>
+                </button>
               </ul>
             </div>
           </div>
 
           <div
-            className={`border-t-2 border-gray-300 px-3 pt-3.5 pb-3 flex gap-x-1 items-center relative transition-all duration-300 ${isOpen ? "-translate-x-0 opacity-100" : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"}`}
+            className={`border-t-2 border-gray-300 px-3 pt-3.5 pb-3 flex gap-x-1 items-center relative transition-all duration-300 ${
+              isOpen
+                ? "-translate-x-0 opacity-100"
+                : "max-[450px]:-translate-x-14 max-[450px]:opacity-0 translate-x-0"
+            }`}
           >
             <div
               className="p-1 relative w-10 h-10 rounded-full shrink-0"

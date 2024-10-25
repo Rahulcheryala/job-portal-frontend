@@ -119,7 +119,17 @@ const JobDetailsCard = ({
 
   return (
     <>
-      <h1 className="text-center lg:text-4xl md:text-3xl text-2xl font-bold text-gray-800 font-RadioGrotesk tracking-wide">
+      <nav className="bg-gray-100 sm:h-14 h-12 w-full flex justify-center items-center rounded-md">
+        <Image
+          src="/assets/icons/company_logo.svg"
+          alt="Company logo"
+          width={275}
+          height={60}
+          className="min-w-fit w-fit sm:h-9 h-7 object-contain select-none"
+        />
+      </nav>
+
+      <h1 className="text-center lg:text-4xl md:text-3xl text-2xl font-bold text-gray-800 font-RadioGrotesk tracking-wide mt-4">
         {jobDetails.job_role || "Job Title"}
       </h1>
 
@@ -132,7 +142,7 @@ const JobDetailsCard = ({
                 {jobDetails.employment_type} Opportunity
               </span>
             </h4>
-            <h5 className="text-sm font-semibold text-gray-400 sm:mb-2 mb-1">
+            <h5 className="text-sm font-semibold text-blue-500 sm:mb-2 mb-1">
               {jobDetails.posted_by.company_name}
             </h5>
 
@@ -142,7 +152,7 @@ const JobDetailsCard = ({
                   size={18}
                   className="inline me-1.5 text-gray-700"
                 />
-                <p className="text-gray-500 text-sm inline-block">
+                <p className="text-gray-500 max-[450px]:text-xs text-sm inline-block">
                   <span className="inline-block font-semibold">Location -</span>{" "}
                   {jobDetails.job_location}
                 </p>
@@ -153,7 +163,7 @@ const JobDetailsCard = ({
                   size={20}
                   className="inline me-1.5 text-gray-700"
                 />
-                <p className="text-gray-500 text-sm inline-block">
+                <p className="text-gray-500 max-[450px]:text-xs text-sm inline-block">
                   <span className="inline-block font-semibold">Salary -</span> ₹
                   {jobDetails.annual_salary_min} -{jobDetails.annual_salary_max}{" "}
                   {jobDetails.currency_type.toLocaleUpperCase()}
@@ -165,7 +175,7 @@ const JobDetailsCard = ({
                   size={16}
                   className="inline me-1.5 text-gray-700"
                 />
-                <p className="text-gray-500 text-sm inline-block">
+                <p className="text-gray-500 max-[450px]:text-xs text-sm inline-block">
                   <span className="inline-block font-semibold">Apply by -</span>{" "}
                   {formatDate(jobDetails.application_deadline)}
                 </p>
@@ -174,9 +184,9 @@ const JobDetailsCard = ({
               <h2 className="block">
                 <GrUserExpert
                   size={16}
-                  className="inline me-1.5 text-gray-500"
+                  className="inline ms-0.5 me-1.5 text-gray-500"
                 />
-                <p className="text-gray-500 text-sm inline-block">
+                <p className="text-gray-500 max-[450px]:text-xs text-sm inline-block">
                   <span className="inline-block font-semibold">
                     Experience -
                   </span>{" "}

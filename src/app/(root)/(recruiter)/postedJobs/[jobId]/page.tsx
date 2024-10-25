@@ -79,8 +79,7 @@ const JobDetails = ({ params }: { params: { jobId: number } }) => {
     }));
   };
 
-  const baseurl =
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000/api";
+  const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     // Ensure this runs only in the browser

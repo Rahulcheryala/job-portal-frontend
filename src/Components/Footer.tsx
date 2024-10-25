@@ -10,15 +10,15 @@ const Footer = () => {
           href={"/"}
         >
           <Image
-            src="/assets/icons/logo.svg"
-            alt="Code Unity logo"
+            src="/assets/icons/company_logo.svg"
+            alt="Company logo"
             width={415}
             height={60}
             className=" min-w-24 w-24 sm:min-w-32 sm:w-32 sm:h-10 h-8 object-contain"
           />
         </Link>
         <p className="sm:text-sm text-xs text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-300 sm:py-2 sm:mt-0 mt-2">
-          @ 2024 Code Unity — All rights reserved
+          @ 2024 QuickHire — All rights reserved
           {/* <a
             href="https://twitter.com/knyttneve"
             className="text-gray-600 ml-1"
